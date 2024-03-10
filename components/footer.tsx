@@ -4,7 +4,7 @@ import React from 'react'
 const Footer = () => {
   return (
     <>
-     <section>
+    
     <div className='l'>
            <Image
             src="/assets/images/footer.jpg"
@@ -15,7 +15,7 @@ const Footer = () => {
             />
             </div>
             <p className='l-txt'>@ Copyright 2024 TrackWatch</p>
-            </section>
+            
     </>
   )
 }

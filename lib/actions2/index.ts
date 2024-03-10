@@ -1,10 +1,10 @@
 "use server"
 
 import { revalidatePath } from "next/cache";
-import Product from "../models/product.model";
+import Product2 from "../models/product2.model";
 import { connectToDB } from "../mongoose";
-import { scrapeAmazonProduct } from "../scraper2";
-import { getAveragePrice, getHighestPrice, getLowestPrice } from "../utils";
+import { scrapeFlipkartProduct } from "../scraper2";
+import { getAveragePrice, getHighestPrice, getLowestPrice } from "../utils2";
 import { User } from "@/types";
 import { generateEmailBody, sendEmail } from "../nodemailer";
 
@@ -14,13 +14,13 @@ export async function scrapeAndStoreProduct(productUrl: string) {
   try {
     connectToDB();
 
-    const scrapedProduct = await scrapeAmazonProduct(productUrl);
+    const scrapedProduct = await scrapeFlipkartProduct(productUrl);
 
     if(!scrapedProduct) return;
 
     let product = scrapedProduct;
 
-    const existingProduct = await Product.findOne({ url: scrapedProduct.url });
+    const existingProduct = await Product2.findOne({ url: scrapedProduct.url });
 
     if(existingProduct) {
       const updatedPriceHistory: any = [
@@ -37,13 +37,14 @@ export async function scrapeAndStoreProduct(productUrl: string) {
       }
     }
 
-    const newProduct = await Product.findOneAndUpdate(
+    const newProduct = await Product2.findOneAndUpdate(
       { url: scrapedProduct.url },
       product,
       { upsert: true, new: true }
     );
-
-    revalidatePath(`/products/${newProduct._id}`);
+      revalidatePath(`/products2/${newProduct._id}`);
+    
+    
   } catch (error: any) {
     throw new Error(`Failed to create/update product: ${error.message}`)
   }
@@ -53,9 +54,9 @@ export async function getProductById(productId: string) {
   try {
     connectToDB();
 
-    const product = await Product.findOne({ _id: productId });
+    const product = await Product2.findOne({ _id: productId });
 
-    if(!product) return null;
+    /* if(!product) return null; */
 
     return product;
   } catch (error) {
@@ -67,7 +68,7 @@ export async function getAllProducts() {
   try {
     connectToDB();
 
-    const products = await Product.find();
+    const products = await Product2.find();
 
     return products;
   } catch (error) {
@@ -79,11 +80,11 @@ export async function getSimilarProducts(productId: string) {
   try {
     connectToDB();
 
-    const currentProduct = await Product.findById(productId);
+    const currentProduct = await Product2.findById(productId);
 
     if(!currentProduct) return null;
 
-    const similarProducts = await Product.find({
+    const similarProducts = await Product2.find({
       _id: { $ne: productId },
     }).limit(3);
 
@@ -95,7 +96,7 @@ export async function getSimilarProducts(productId: string) {
 
 export async function addUserEmailToProduct(productId: string, userEmail: string) {
   try {
-    const product = await Product.findById(productId);
+    const product = await Product2.findById(productId);
 
     if(!product) return;
 
