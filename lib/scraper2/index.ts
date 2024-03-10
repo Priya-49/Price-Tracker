@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
-import { extractDescription, extractPrice, getLowestPrice } from "../utils2";
+import { extractDescription, extractPrice} from "../utils2";
 
 export async function scrapeFlipkartProduct(url:string){
     if(!url) return;

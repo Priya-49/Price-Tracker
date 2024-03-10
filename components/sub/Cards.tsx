@@ -8,9 +8,9 @@ const YourComponent = () => {
   // An array with data for each card
   const cardData = [
     { image: '/assets/images/pig1.jpeg', title: 'Amazon', link: '/amazon' },
-    { image: '/assets/images/pig2.jpeg', title: 'Shopify', link: '/Flipkart' },
+    { image: '/assets/images/pig2.jpeg', title: 'Shopify', link: '/amazon' },
     { image: '/assets/images/pig3.jpeg', title: 'Ajio', link: '/amazon' },
-    { image: '/assets/images/pig4.jpeg', title: 'FlipKart', link: '/Flipkart' },
+    { image: '/assets/images/pig4.jpeg', title: 'FlipKart', link: '/amazon' },
   ];
 
   return (

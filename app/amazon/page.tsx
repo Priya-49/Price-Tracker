@@ -5,11 +5,11 @@ import Image from 'next/image';
 import React from 'react'
 import { getAllProducts } from '@/lib/actions';
 import ProductCard from '@/components/ProductCard';
-import Card from '@/components/card';
+
 import Link from 'next/link';
 
 
-export const Home = async () => {
+ const Home = async () => {
      const allProducts=await getAllProducts();
    
   return (

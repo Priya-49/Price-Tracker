@@ -1,7 +1,7 @@
 "using client";
 import React from 'react'
 import Image from 'next/image'
-import {motion} from 'framer-motion'
+
 import { Button } from '@nextui-org/react';
 /* import { slideInFromLeft, slideInFromRight, slideInFromTop } from '@/utils/motion'
 import { tenorsans, diphylleia, josefinsans, montserrat } from '../fonts/fonts'; */

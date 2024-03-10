@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Inter,Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar';
-import Home2, { Home } from './amazon/page';
+import Home from './amazon/page';
 import Footer from '@/components/footer';
 
 const inter = Inter({ subsets: ['latin'] });

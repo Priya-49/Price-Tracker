@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React, { Children } from 'react'
 import { getAllProducts } from '@/lib/actions';
 import ProductCard from '@/components/ProductCard';
-import Searchbar2 from '@/components/searchbar2';
+
 import Link from 'next/link';
 import { useRouter,Router } from 'next/router';
 import { revalidatePath } from 'next/cache';

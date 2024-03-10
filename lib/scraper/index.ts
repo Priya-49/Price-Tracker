@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as cheerio from "cheerio";
-import { extractDescription, extractPrice, getLowestPrice } from "../utils";
+import { extractDescription, extractPrice} from "../utils";
 
 export async function scrapeAmazonProduct(url:string){
     if(!url) return;
@@ -40,7 +40,7 @@ export async function scrapeAmazonProduct(url:string){
         const currency=$('.a-price-symbol').text().trim().slice(0,1);
         const discountRate=$('span.savingsPercentage').text() .replace(/[-%]/g,'') ;
         const ratings=$('i.a-icon.a-icon-star.cm-cr-review-stars-spacing-big').text().trim().slice(0,1);
-
+        const st: number = parseFloat(ratings);
         const data={
             url,
             currency:currency,
@@ -52,7 +52,7 @@ export async function scrapeAmazonProduct(url:string){
             discountRate:Number(discountRate),
             category:'category',
             reviewsCount:100,
-            stars:ratings,
+            stars:st,
             isOutOfStock:outOfStock,
             description,
             lowestPrice:Number(currentPrice)||Number(originalPrice),
